@@ -41,8 +41,15 @@ namespace WebApp.Controllers
         [HttpPost]
         public ActionResult Add(NicknameAndEmailViewModel viewModel)
         {
-            _repository.Add(viewModel);
-            return RedirectToAction("List");
+            if (ModelState.IsValid)
+            {
+                _repository.Add(viewModel);
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View(viewModel);
+            }
         }
 
         [HttpGet]
